@@ -1,8 +1,8 @@
 import numpy as np
 
-from orbit_functions_nfw import tidefun
+from tidal.orbit_functions_nfw import tidefun
 
-from tidal_evolution_parameters import *
+from tidal.tidal_evolution_parameters import *
 
 # general helpers
 

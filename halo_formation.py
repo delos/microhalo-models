@@ -245,7 +245,7 @@ class Cosmology(object):
       nu = np.concatenate((nu,nu_))
       x = np.concatenate((x,x_))
       Ngen = len(nu)
-    print('  nu, x sampled in%.2fs'%(time.clock() - time_start))
+    print('  nu, x sampled in %.2fs'%(time.clock() - time_start))
     return nu[:N], x[:N]
   
   def sample_ep(self,nu,x):
@@ -406,18 +406,17 @@ class Cosmology(object):
     Mmax = np.zeros_like(nu)-1.
     time_start = time.clock()
     for i in range(len(nu)):
-      if i%1000==0:
-        print('  sampled %d r_max, M_max pairs in %.2fs'%(i,time.clock() - time_start))
-      if d[i] < self.dcoll:
-        continue
-      delta,Delta,eps = self._sample_delta(nu[i],x[i],True,True)
-      if self.s == 'ta':
-        rf,M = self._profile_simple(d[i],delta,Delta,eps)
-        dlnXdlnq = 0
-      else:
-        rf,M,dlnXdlnq = self._profile(d[i],delta,Delta,eps,return_dlnXdlnq=True)
-      if np.size(rf) > 1:
-        rmax[i],Mmax[i] = self._rM(eps[:len(rf)],rf,M,dlnXdlnq)
+      if d[i] >= self.dcoll:
+        delta,Delta,eps = self._sample_delta(nu[i],x[i],True,True)
+        if self.s == 'ta':
+          rf,M = self._profile_simple(d[i],delta,Delta,eps)
+          dlnXdlnq = 0
+        else:
+          rf,M,dlnXdlnq = self._profile(d[i],delta,Delta,eps,return_dlnXdlnq=True)
+        if np.size(rf) > 1:
+          rmax[i],Mmax[i] = self._rM(eps[:len(rf)],rf,M,dlnXdlnq)
+      if i%1000==999:
+        print('  sampled %d r_max, M_max pairs in %.2fs'%(i+1,time.clock() - time_start))
     return rmax, Mmax
   
   def sample_A(self,N,return_ac=False,return_ace=False):

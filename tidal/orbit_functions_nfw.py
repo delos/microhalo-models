@@ -1,6 +1,28 @@
 import numpy as np
-import profiles
 from scipy.optimize import brentq
+
+# NFW profile
+
+def mass(R):
+  return np.where(R<.1,
+                  R**2/2. - 2.*R**3/3. + 3.*R**4/4 - 4*R**5/5 + 5.*R**6/6,
+                  np.log(1+R)-R/(1.+R)
+                  )
+
+def potential(R):
+  return np.where(R<.1,
+                  1.-R/2.+R**2/3.-R**3/4.+R**4/5.-R**5/6.+R**6/7.,
+                  np.divide(np.log(1+R),R,where=R>0)
+                  )
+
+
+def r3_over_mass(R):
+  return np.where(R<.1,
+                  2*R + 8*R**2/3. + 5*R**3/9. - 8*R**4/135. + 17*R**5/810. - 86*R**6/8505.,
+                  R**3/mass(R)
+                  )
+
+# orbit functions
 
 def Efun(r,eta):
   p = np.array([ 3.32704302,  0.64631396,  0.88365924,  0.88088006,  0.21558338,
@@ -31,8 +53,8 @@ def Tfun(r,eta):
   I=1.288120
   return A*(1+F*eta**G)*(1+B*np.log(1+r)-C*r/(D+r))/(1+E*(1+H*eta**I)*(np.log(1+r)-2*r/(2+r)))
 
-M = lambda r: 4*np.pi*profiles.mass(r,[1,3,1])
-Phi = lambda r: -4*np.pi*profiles.potential(r,[1,3,1])
+M = lambda r: 4*np.pi*mass(r)
+Phi = lambda r: -4*np.pi*potential(r)
 F = lambda r: M(r)/r**2
 def ravg_fun(rc,eta):
   return rfun(rc,eta)*rc
@@ -108,7 +130,7 @@ def z2_fun(rc,eta,p,a=1,b=1): # x = Eb/(F/R)
   if np.isscalar(rc)&np.isscalar(eta)&np.isscalar(p):
     if eta == 0:
       return 0
-    rhoinv = lambda r: profiles.r3_over_mass(r,[1,3,1])/(4*np.pi*p)
+    rhoinv = lambda r: r3_over_mass(r)/(4*np.pi*p)
     try:
       #rho = lambda r: p*M(r)/r**3
       #rt = brentq(lambda r: rho(r)-rhot,1e-12,1e12)
@@ -128,7 +150,7 @@ def z2_fun(rc,eta,p,a=1,b=1): # x = Eb/(F/R)
       #rho = lambda r: p_[i]*M(r)/r**3
       #rt = brentq(lambda r: rho(r)-rhot_[i],1e-12,1e12)
       #ra = brentq(lambda r: rho(r)-rhoa_[i],1e-12,1e12)
-      rhoinv = lambda r: profiles.r3_over_mass(r,[1,3,1])/(4*np.pi*p_[i])
+      rhoinv = lambda r: r3_over_mass(r)/(4*np.pi*p_[i])
       rt = brentq(lambda r: rhoinv(r)-1./rhot_[i],0,1e12)
       ra = brentq(lambda r: rhoinv(r)-1./rhoa_[i],0,1e12)
       ret[i] = ra/rt
