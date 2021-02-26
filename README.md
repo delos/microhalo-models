@@ -15,7 +15,7 @@ Predicts the evolution of a halo due to an arbitrary sequence of encounters with
 
 # Examples
 
-To be added.
+1. [Generating a sample of halos in the solar vicinity for the purpose of pulsar timing observations](https://github.com/delos/microhalo-models/tree/main/examples/pulsar-timing)
 
 # Planned additions
 
