@@ -1,6 +1,8 @@
 # Microhalo models
 Tools for predicting the formation and evolution of dark matter halos, particularly at the smallest scales.
 
+Requires: numpy and scipy.
+
 ## halo_formation.py
 
 Samples a halo population using the method of [arXiv:1905.05766](https://arxiv.org/abs/1905.05766) (modified based on Appendix A of [arXiv:1910.08553](https://arxiv.org/abs/1910.08553)). Density peaks are sampled from a matter power spectrum, and the structure of each peak predicts the structure of the resulting halo.
