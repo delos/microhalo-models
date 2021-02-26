@@ -11,7 +11,7 @@ Predicts the evolution of a subhalo due to a host halo's tidal forces using the 
 
 ## stellar_encounters.py
 
-Predicts the evolution of a halo due to an arbitrary sequence of encounters with point objects, such as stars. The model is described in [arXiv:1907.13133](https://arxiv.org/abs/1907.13133)
+Predicts the evolution of a halo due to an arbitrary sequence of encounters with point objects, such as stars. The model is described in [arXiv:1907.13133](https://arxiv.org/abs/1907.13133).
 
 # Examples
 
