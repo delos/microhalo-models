@@ -1,6 +1,8 @@
 # Microhalo models
 Tools for predicting the formation and evolution of dark matter halos, particularly at the smallest scales.
 
+Requires: numpy and scipy.
+
 ## halo_formation.py
 
 Samples a halo population using the method of [arXiv:1905.05766](https://arxiv.org/abs/1905.05766) (modified based on Appendix A of [arXiv:1910.08553](https://arxiv.org/abs/1910.08553)). Density peaks are sampled from a matter power spectrum, and the structure of each peak predicts the structure of the resulting halo.
@@ -11,11 +13,11 @@ Predicts the evolution of a subhalo due to a host halo's tidal forces using the 
 
 ## stellar_encounters.py
 
-Predicts the evolution of a halo due to an arbitrary sequence of encounters with point objects, such as stars. The model is described in [arXiv:1907.13133](https://arxiv.org/abs/1907.13133)
+Predicts the evolution of a halo due to an arbitrary sequence of encounters with point objects, such as stars. The model is described in [arXiv:1907.13133](https://arxiv.org/abs/1907.13133).
 
 # Examples
 
-To be added.
+1. [Generating a sample of halos in the solar vicinity for the purpose of pulsar timing observations](https://github.com/delos/microhalo-models/tree/main/examples/pulsar-timing)
 
 # Planned additions
 
