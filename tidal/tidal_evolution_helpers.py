@@ -4,6 +4,10 @@ from tidal.orbit_functions_nfw import tidefun
 
 from tidal.tidal_evolution_parameters import *
 
+'''
+Tidal evolution models in terms of intermediate variables n, x, y, z
+'''
+
 # general helpers
 
 afun = lambda r,a,b: a-b*tidefun(r)

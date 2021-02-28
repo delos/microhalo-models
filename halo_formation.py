@@ -268,6 +268,11 @@ class Cosmology(object):
     return e,p
     
   def _sample_A(self,nu,x,e,p,return_ac=False,return_ace=False):
+    
+    '''
+    Predict A given peak parameters
+    '''
+    
     N = len(nu)
     
     # compute asymptote
@@ -295,6 +300,11 @@ class Cosmology(object):
       return ret
   
   def _sample_delta(self,nu,x,return_Delta=False,return_eps=False):
+    
+    '''
+    Sample density profile about given peak
+    '''
+    
     delta_mean = 1./(1-self.gamma**2)*((self.cov_delta_nu-self.gamma*self.cov_delta_x)*nu+(self.cov_delta_x-self.gamma*self.cov_delta_nu)*x)
     kappa = np.random.normal(0,self.delta_vals**.5).reshape((self.nr,1))
     delta = (delta_mean+np.matmul(self.delta_vecs,kappa))
@@ -312,6 +322,11 @@ class Cosmology(object):
       return tuple(ret)
   
   def _profile(self,d,delta,Delta,eps,return_X=False,return_dlnXdlnq=False):
+    
+    '''
+    Predict halo mass profile given peak profile
+    '''
+    
     fail = [-1,-1]
     if return_X:
       fail += [-1]
@@ -365,6 +380,11 @@ class Cosmology(object):
     return tuple(ret)
   
   def _profile_simple(self,d,delta,Delta,eps):
+    
+    '''
+    Predict halo mass profile given peak profile (turnaround model)
+    '''
+    
     fail = [-1,-1]
     if d < self.dcoll:
       return fail
@@ -385,6 +405,11 @@ class Cosmology(object):
     return tuple(ret)
   
   def _rM(self,eps,rf,M,dlnXdlnq=0):
+    
+    '''
+    Read r_max, M_max from mass profile
+    '''
+    
     ith = np.argmax(M/rf)
     if ith == len(rf)-1:
       # max is at the largest resolved radius---this is not the true r_max.
@@ -401,6 +426,11 @@ class Cosmology(object):
     return rmax,Mmax
   
   def _sample_rM(self,nu,x):
+    
+    '''
+    Sample r_max, M_max given a peak
+    '''
+    
     d = nu*self.sigma0
     rmax = np.zeros_like(nu)-1.
     Mmax = np.zeros_like(nu)-1.

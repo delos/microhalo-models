@@ -1,5 +1,9 @@
 import numpy as np
 
+'''
+Dimensionful -> dimensionless parameters
+'''
+
 def x_func(R,rhos,Rs,Rhos): # |Eb|/[(F/R)r^2]
   r = R/Rs
   F = Rhos*Rs * (np.log(1+r)-r/(1+r))/r**2 # F / (4piG)

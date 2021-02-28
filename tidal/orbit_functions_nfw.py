@@ -1,6 +1,10 @@
 import numpy as np
 from scipy.optimize import brentq
 
+'''
+Implements functions from Appendix C of arXiv:1906.10690
+'''
+
 # NFW profile
 
 def mass(R):
@@ -64,9 +68,9 @@ def rp_fun(rc,eta):
       return 0
     try:
       return brentq(lambda r: Phi(rc)-Phi(r)+(1-eta**2*rc**2/r**2)*M(rc)/(2*rc),1e-12,rc)
-    except:
-      print(rc,eta)
-      raise
+    except Exception as e:
+      print('rc = ' + str(rc) + ', eta = ' + str(eta))
+      raise e
   else:
     ret = np.zeros(np.broadcast(rc,eta).shape)
     #rc = np.broadcast_to(rc,np.broadcast(rc,eta).shape)
@@ -85,9 +89,9 @@ def ra_fun(rc,eta):
       return 0
     try:
       return brentq(lambda r: Phi(rc)-Phi(r)+(1-eta**2*rc**2/r**2)*M(rc)/(2*rc),rc,1e12)
-    except:
-      print(rc,eta)
-      raise
+    except Exception as e:
+      print('rc = ' + str(rc) + ', eta = ' + str(eta))
+      raise e
   else:
     ret = np.zeros(np.broadcast(rc,eta).shape)
     #rc = np.broadcast_to(rc,np.broadcast(rc,eta).shape)
@@ -138,9 +142,9 @@ def z2_fun(rc,eta,p,a=1,b=1): # x = Eb/(F/R)
       rt = brentq(lambda r: rhoinv(r)-1./rhot,0,1e12)
       ra = brentq(lambda r: rhoinv(r)-1./rhoa,0,1e12)
       return ra/rt
-    except:
-      print('%g,%g: 1/rho(min)=%g, 1/rho(max)=%g, 1/rhot=%g, 1/rhoa=%g'%(rc,eta,rhoinv(1e-12),rhoinv(1e12),1./rhot,1./rhoa))
-      raise
+    except Exception as e:
+      print('rc=%g,eta=%g: 1/rho(min)=%g, 1/rho(max)=%g, 1/rhot=%g, 1/rhoa=%g'%(rc,eta,rhoinv(1e-12),rhoinv(1e12),1./rhot,1./rhoa))
+      raise e
   else:
     ret = np.zeros(np.broadcast(rc,eta,p).shape)
     #rc = np.broadcast_to(rc,np.broadcast(rc,eta).shape)

@@ -1,5 +1,9 @@
 import numpy as np
 
+'''
+Simulation-tuned tidal evolution parameters
+'''
+
 # parameters for J evolution
 a_coefr = np.array([0.43739546, 1.31628209])
 b_coef,b_index,b_coefr = np.array([0.58066774, 0.58081087, 1.29275231])
