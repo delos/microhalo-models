@@ -17,7 +17,9 @@ Predicts the evolution of a halo due to an arbitrary sequence of encounters with
 
 # Examples
 
-1. [Generating a sample of halos in the solar vicinity for the purpose of pulsar timing observations](https://github.com/delos/microhalo-models/tree/main/examples/pulsar-timing)
+1. [extragalactic-annihilation](examples/extragalactic-annihilation): Computes the factor by which microhalos arising due to early matter domination boost the extragalactic annihilation signal.
+2. [annihilation-suppression](examples/annihilation-suppression): Integrates the aggregate factor by which tidal evolution scales the annihilation rate within subhalos of a set internal density inside a set host halo.
+3. [pulsar-timing](examples/pulsar-timing): Generates a sample of halos in the solar vicinity for the purpose of pulsar timing observations.
 
 # Planned additions
 
