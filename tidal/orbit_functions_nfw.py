@@ -101,10 +101,7 @@ def ra_fun(rc,eta):
       fun = lambda r: Phi(rc_[i])-Phi(r)+(1-eta_[i]**2*rc_[i]**2/r**2)*M(rc_[i])/(2*rc_[i])
       ret[i] = brentq(fun,rc_[i],1e12)
     return ret
-def z_fun(rc,eta):
-  ravg = ravg_fun(rc,eta)
-  rp = rp_fun(rc,eta)
-  return np.where(eta>0,eta**-2*M(ravg)/M(rc)*rp**4/(ravg**3*rc),0)
+  
 def xE_fun(rc,eta,x):
   return x/Efun(rc,eta)
 
@@ -113,14 +110,7 @@ def tidefun(r):
   Fp = ((2+3*r)/(r**2*(1+r)**2) - 2*np.log(1+r)/r**3) # dF/dR / (4piG)
   return -Fp/F
 
-def eta_from_rc_q(rc,q): # q = rp/ra
-  if q == 0 or q == 1:
-    return q
-  rp = brentq(lambda rp: q**2*(rc*F(rc)+2*Phi(rc)-2*Phi(rp))-rc*F(rc)-2*Phi(rc)+2*Phi(rp/q),0,rc)
-  eta = rp/rc*np.sqrt(1+2*(Phi(rc)-Phi(rp))/(rc*F(rc)))
-  return eta
-
-def z2_fun(rc,eta,p,a=1,b=1): # x = Eb/(F/R)
+def z_fun(rc,eta,p,a=1,b=1): # x = Eb/(F/R)
   #p = 1./np.log(2)*x*(np.log(1+rc)-rc/(1+rc))/rc**3
   # tidal radius where m/r^3 = rhot
   #y = ravg_fun(rc,eta)

@@ -47,18 +47,17 @@ def suppress(rs_i,rhos_i,qmin=1e-3,plot=False):
   print('rc=%.3f kpc, eta=%.3f, phi=%.3f rad : %.1f periods'%(rc[i],eta[i],phi[i],Norb))
   print(  'vrel=%.3f km/s'%(vrel[i]))
   
-  # tidal model
+  # apply tidal model
   
-  rmax_i = 2.1625815870646097 * rs_i
-  mmax_i = 5.875855012940598 * rs_i**3 * rhos_i
-  vmax_i = np.sqrt(G*mmax_i/rmax_i)
+  rmax_i = 2.16258 * rs_i # coefficients for NFW profile
+  vmax_i = 1.64835 * rs_i * np.sqrt(G*rhos_i)
   
   with np.errstate(divide='ignore',invalid='ignore'):
     rmax_ = rmax_i * tidal_evolution.rmax_evolve(rc[i],eta[i],Rs,Rhos,rhos_i,age)
     vmax_ = vmax_i * tidal_evolution.vmax_evolve(rc[i],eta[i],Rs,Rhos,rhos_i,age)
   
-  rs_ = 0.53424 * rmax_
-  rhos_ = 1.20501 * vmax_**2 / (G * rmax_**2)
+  rs_ = 0.53197 * rmax_ # coefficients for postencounter profile
+  rhos_ = 1.21453 * vmax_**2 / (G * rmax_**2)
   
   # get orbit
   

@@ -46,7 +46,7 @@ def J_evolve_compress(R,Rc,eta,Rs,Rhos,rhos,age,G=4.3022682e-6,decay_cap=None):
   
   rc = Rc/Rs
   T = defs.t0_func(Rc,Rs,Rhos,G)*functions.Tfun(rc,eta)
-  z = functions.z2_fun(rc,eta,rhos/Rhos,1,1)
+  z = functions.z_fun(rc,eta,rhos/Rhos,1,1)
   x = functions.xE_fun(rc,eta,defs.x_func(Rc,rhos,Rs,Rhos))
   y = functions.ravg_fun(rc,eta)
   Ravg = y*Rs
@@ -93,7 +93,7 @@ def J_evolve(Rc,eta,Rs,Rhos,rhos,age,G=4.3022682e-6,decay_cap=None):
   
   rc = Rc/Rs
   T = defs.t0_func(Rc,Rs,Rhos,G)*functions.Tfun(rc,eta)
-  z = functions.z2_fun(rc,eta,rhos/Rhos,1,1)
+  z = functions.z_fun(rc,eta,rhos/Rhos,1,1)
   x = functions.xE_fun(rc,eta,defs.x_func(Rc,rhos,Rs,Rhos))
   y = functions.ravg_fun(rc,eta)
   return helpers.scale_J_time(age/T,x,y,z,decay_cap)
@@ -175,7 +175,7 @@ def rmax_evolve(Rc,eta,Rs,Rhos,rhos,age,G=4.3022682e-6,decay_cap=None):
   
   rc = Rc/Rs
   T = defs.t0_func(Rc,Rs,Rhos,G)*functions.Tfun(rc,eta)
-  z = functions.z2_fun(rc,eta,rhos/Rhos,1,1)
+  z = functions.z_fun(rc,eta,rhos/Rhos,1,1)
   x = functions.xE_fun(rc,eta,defs.x_func(Rc,rhos,Rs,Rhos))
   y = functions.ravg_fun(rc,eta)
   return helpers.scale_r_time(age/T,x,y,z,decay_cap)
@@ -217,7 +217,7 @@ def vmax_evolve(Rc,eta,Rs,Rhos,rhos,age,G=4.3022682e-6,decay_cap=None):
   
   rc = Rc/Rs
   T = defs.t0_func(Rc,Rs,Rhos,G)*functions.Tfun(rc,eta)
-  z = functions.z2_fun(rc,eta,rhos/Rhos,1,1)
+  z = functions.z_fun(rc,eta,rhos/Rhos,1,1)
   x = functions.xE_fun(rc,eta,defs.x_func(Rc,rhos,Rs,Rhos))
   y = functions.ravg_fun(rc,eta)
   return helpers.scale_v_time(age/T,x,y,z,decay_cap)
