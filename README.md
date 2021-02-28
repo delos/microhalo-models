@@ -13,6 +13,8 @@ Samples a halo population using the method of [arXiv:1905.05766](https://arxiv.o
 
 Predicts the evolution of a subhalo due to a host halo's tidal forces using the model described in [arXiv:1906.10690](https://arxiv.org/abs/1906.10690) (with an addition based on Appendix C of [arXiv:1910.08553](https://arxiv.org/abs/1910.08553)).
 
+In order to model the range of scales relevant to microhalo scenarios, these tidal evolution predictions have been validated across a much broader range of subhalo-host systems and timescales than are ordinarily seen in cosmological simulations. The J factor evolution is the most tightly tuned, whereas there is more scatter from the r_max and v_max predictions.
+
 ## stellar_encounters.py
 
 Predicts the evolution of a halo due to an arbitrary sequence of encounters with point objects, such as stars. The model is described in [arXiv:1907.13133](https://arxiv.org/abs/1907.13133).
