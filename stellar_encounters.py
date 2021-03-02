@@ -1,4 +1,5 @@
 import numpy as np
+from scipy.special import hyp2f1
 
 def from_nfw(rhos_NFW,rs_NFW):
   
@@ -141,3 +142,24 @@ def stellar_encounters(rhos,rs,m_list,b_list,v_list,t_list,G=4.3022682e-6,
     return rhos,rs
   else:
     return rhos[-1], rs[-1]
+
+def postencounter_density_profile(x):
+  
+  '''
+  The postencounter density profile, as defined in arXiv:xxxx.xxxxx.
+  
+  Parameters:
+    
+    x = r/r_s: the radius r at which to evaluate the density, in units of the
+    scale radius r_s.
+    
+  Returns:
+    
+    rho/rho_s: the density rho in units of the scale density rho_s.
+  '''
+  
+  alpha = 0.78
+  beta = 5.
+  
+  q = (1./3*x**alpha)**beta
+  return np.exp(-1./alpha * x**alpha * (1+q)**(1-1/beta) * hyp2f1(1,1,1+1/beta,-q))/x
