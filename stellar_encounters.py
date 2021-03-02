@@ -151,11 +151,11 @@ def postencounter_density_profile(x):
   Parameters:
     
     x = r/r_s: the radius r at which to evaluate the density, in units of the
-    scale radius r_s.
+    halo's scale radius r_s.
     
   Returns:
     
-    rho/rho_s: the density rho in units of the scale density rho_s.
+    rho/rho_s: the density rho in units of the halo's scale density rho_s.
   '''
   
   alpha = 0.78
