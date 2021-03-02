@@ -7,9 +7,13 @@ Requires: numpy and scipy.
 
 Samples a halo population using the method of [arXiv:1905.05766](https://arxiv.org/abs/1905.05766) (modified based on Appendix A of [arXiv:1910.08553](https://arxiv.org/abs/1910.08553)). Density peaks are sampled from a matter power spectrum, and the structure of each peak predicts the structure of the resulting halo.
 
+**These predictions are very accurate when the matter power spectrum exhibits a steep boost at some small scale** (for example, due to early matter domination, axion PQ symmetry breaking, or particle production during inflation, among other cosmological scenarios). **They fare less well with flatter power spectra**, like standard CDM, for which (a) halo mergers are much more important and (b) smooth accretion is rapid enough to drive internal halo evolution.
+
 ## tidal_evolution.py
 
 Predicts the evolution of a subhalo due to a host halo's tidal forces using the model described in [arXiv:1906.10690](https://arxiv.org/abs/1906.10690) (with an addition based on Appendix C of [arXiv:1910.08553](https://arxiv.org/abs/1910.08553)).
+
+In order to model the range of scales relevant to microhalo scenarios, these tidal evolution predictions have been validated across a much broader range of subhalo-host systems and timescales than are ordinarily seen in cosmological simulations. The J factor evolution is the most tightly tuned, whereas there is more scatter from the r_max and v_max predictions.
 
 ## stellar_encounters.py
 
