@@ -224,29 +224,25 @@ class Cosmology(object):
     1986.
     '''
     
-    # use rejection method
-    fxmax = self.fx(fmin(lambda x: -self.fx(x),1,disp=False)[0])
     fnuxmax = self.fnux(*fmin(lambda nux: -self.fnux(nux[0],nux[1]),[1,1],disp=False))
-    def randnux(N):
-      P = np.random.rand(N)*fxmax
-      x = np.random.rand(N)*self.numax
-      x = x[P<self.fx(x)]
-      N = len(x)
-      P = np.random.rand(N)*fnuxmax
-      nu = np.random.rand(N)*self.numax
-      idx = P<self.fnux(nu,x)
-      return nu[idx],x[idx]
-    Ngen = 0
-    nu = []
-    x = []
+    sample = lambda N: (np.random.rand(N)*self.numax, np.random.rand(N)*self.numax)
+    test = lambda nu,x: np.random.rand(nu.size)*fnuxmax < self.fnux(nu,x)
+    
     time_start = time.clock()
-    while(Ngen < N):
-      nu_,x_ = randnux(N)
-      nu = np.concatenate((nu,nu_))
-      x = np.concatenate((x,x_))
-      Ngen = len(nu)
+    
+    nu,x = sample(N)
+    accept = test(nu,x)
+    reject, = np.where(~accept)
+    while reject.size > 0:
+      nu_,x_ = sample(reject.size)
+      accept = test(nu_,x_)
+      nu[reject[accept]] = nu_[accept]
+      x[reject[accept]] = x_[accept]
+      reject = reject[~accept]
+      
     print('  nu, x sampled in %.2fs'%(time.clock() - time_start))
-    return nu[:N], x[:N]
+    
+    return nu,x
   
   def sample_ep(self,nu,x):
     
