@@ -28,5 +28,5 @@ Predicts the evolution of a halo due to an arbitrary sequence of encounters with
 # Planned additions
 
 1. A predictive model of the outcomes of mergers between microhalos.
-2. For certain power spectra, smooth accretion is rapid enough to drive internal halo evolution. Predictively model this effect.
+2. For certain power spectra, smooth accretion is rapid enough to drive internal halo evolution. Consider this effect.
 3. A more general model of subhalo tidal evolution.
