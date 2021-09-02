@@ -17,7 +17,7 @@ In order to model the range of scales relevant to microhalo scenarios, these tid
 
 ## stellar_encounters.py
 
-Predicts the evolution of a halo due to an arbitrary sequence of encounters with point objects, such as stars. The model is described in [arXiv:1907.13133](https://arxiv.org/abs/1907.13133). A refinement to the postencounter halo density profile is given in Appendix B of [arXiv:2109.xxxxx](https://arxiv.org/abs/2109.xxxxx)
+Predicts the evolution of a halo due to an arbitrary sequence of encounters with point objects, such as stars. The model is described in [arXiv:1907.13133](https://arxiv.org/abs/1907.13133) (with a refinement to the postencounter halo density profile given in Appendix B of [arXiv:2109.xxxxx](https://arxiv.org/abs/2109.xxxxx)).
 
 # Examples
 
