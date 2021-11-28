@@ -7,7 +7,7 @@ Requires: numpy and scipy.
 
 Samples a halo population using the method of [arXiv:1905.05766](https://arxiv.org/abs/1905.05766) (modified based on Appendix A of [arXiv:1910.08553](https://arxiv.org/abs/1910.08553)). Density peaks are sampled from a matter power spectrum, and the structure of each peak predicts the structure of the resulting halo.
 
-**These predictions are very accurate when the matter power spectrum exhibits a steep boost at some small scale** (for example, due to early matter domination, axion PQ symmetry breaking, or particle production during inflation, among other cosmological scenarios). **They fare less well with flatter power spectra**, like standard CDM, for which (a) halo mergers are much more important and (b) smooth accretion is rapid enough to drive internal halo evolution.
+**These predictions are very accurate when the matter power spectrum exhibits a steep boost at some small scale** (for example, due to early matter domination, axion PQ symmetry breaking, or particle production during inflation, among other cosmological scenarios). **They fare less well with flatter power spectra**, like standard CDM, for which (a) halo mergers are much more important and (b) smooth accretion may be rapid enough to drive internal halo evolution.
 
 ## tidal_evolution.py
 
@@ -17,7 +17,7 @@ In order to model the range of scales relevant to microhalo scenarios, these tid
 
 ## stellar_encounters.py
 
-Predicts the evolution of a halo due to an arbitrary sequence of encounters with point objects, such as stars. The model is described in [arXiv:1907.13133](https://arxiv.org/abs/1907.13133).
+Predicts the evolution of a halo due to an arbitrary sequence of encounters with point objects, such as stars. The model is described in [arXiv:1907.13133](https://arxiv.org/abs/1907.13133) (with a refinement to the postencounter halo density profile given in Appendix B of [arXiv:2109.2109.03240](https://arxiv.org/abs/2109.03240)).
 
 # Examples
 
@@ -28,5 +28,5 @@ Predicts the evolution of a halo due to an arbitrary sequence of encounters with
 # Planned additions
 
 1. A predictive model of the outcomes of mergers between microhalos.
-2. For certain power spectra, smooth accretion is rapid enough to drive internal halo evolution. Predictively model this effect.
-3. A more general model of subhalo tidal evolution.
+2. For certain power spectra, smooth accretion may be rapid enough to drive internal halo evolution. Explore this effect.
+3. A more general model of subhalo tidal evolution would be nice.
