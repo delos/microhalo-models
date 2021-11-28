@@ -132,7 +132,7 @@ class Cosmology(object):
     kr = self.k.reshape(pshape)*self.r.reshape(vshape) # vector index
     skr = sinc(kr)
     
-    time_start = time.clock()
+    time_start = time.time()
     # column vectors, shape (1,nr,1)
     self.cov_delta_nu = 1./self.sigma0*trapz(self.pk.reshape(pshape)       *skr,x=self.lnk,axis=0)
     self.cov_delta_x  = 1./self.sigma2*trapz((self.pk*self.k**2).reshape(pshape)*skr,x=self.lnk,axis=0)
@@ -143,7 +143,7 @@ class Cosmology(object):
     delta_cov = self.cov_delta_delta-1./(1-self.gamma**2)*(np.matmul(self.cov_delta_nu,self.cov_delta_nu.T)+np.matmul(self.cov_delta_x,self.cov_delta_x.T)-self.gamma*(np.matmul(self.cov_delta_nu,self.cov_delta_x.T)+np.matmul(self.cov_delta_x,self.cov_delta_nu.T)))
     self.delta_vals, self.delta_vecs = linalg.eigh(delta_cov) # vecs.T@vecs = 1, vecs.T@M@vecs = np.diag(vals), vecs@np.diag(vals)@vecs.T = M
     self.delta_vals[self.delta_vals<0]=0
-    print('  covariance matrices computed in %.2fs'%(time.clock() - time_start))
+    print('  covariance matrices computed in %.2fs'%(time.time() - time_start))
     
   def set_scale(self,a):
     
@@ -228,7 +228,7 @@ class Cosmology(object):
     sample = lambda N: (np.random.rand(N)*self.numax, np.random.rand(N)*self.numax)
     test = lambda nu,x: np.random.rand(nu.size)*fnuxmax < self.fnux(nu,x)
     
-    time_start = time.clock()
+    time_start = time.time()
     
     nu,x = sample(N)
     accept = test(nu,x)
@@ -240,7 +240,7 @@ class Cosmology(object):
       x[reject[accept]] = x_[accept]
       reject = reject[~accept]
       
-    print('  nu, x sampled in %.2fs'%(time.clock() - time_start))
+    print('  nu, x sampled in %.2fs'%(time.time() - time_start))
     
     return nu,x
   
@@ -256,11 +256,11 @@ class Cosmology(object):
     P = np.random.rand(N,2)
     e = np.zeros(N)
     p = np.zeros(N)
-    time_start = time.clock()
+    time_start = time.time()
     for i in range(N):
       e[i] = brentq(lambda e: Fe(e,nu[i])-P[i,0],0,2./nu[i])#,rtol=1e-3)
       p[i] = brentq(lambda p: Fp(e[i],p,nu[i])-P[i,1],-e[i],e[i])#,rtol=1e-3)
-    print('  e, p sampled in %.2fs'%(time.clock() - time_start))
+    print('  e, p sampled in %.2fs'%(time.time() - time_start))
     return e,p
     
   def _sample_A(self,nu,x,e,p,return_ac=False,return_ace=False):
@@ -277,10 +277,10 @@ class Cosmology(object):
     #A = d**2.25*d2d**-.75*self.rhoC
     A = dc**(1.5*(1-1./self.g))*d**(.75*(2./self.g+1))*d2d**-.75*self.rhoC
     ec_mod = np.zeros(N)
-    time_start = time.clock()
+    time_start = time.time()
     for i in range(N):
       ec_mod[i] = ec_scale(e[i],p[i])
-    print('  A sampled in %.2fs'%(time.clock() - time_start))
+    print('  A sampled in %.2fs'%(time.time() - time_start))
     idx = (ec_mod>0)&(d>self.dcoll*ec_mod)
     Ae = A.copy()
     Ae[~idx] = -1
@@ -430,7 +430,7 @@ class Cosmology(object):
     d = nu*self.sigma0
     rmax = np.zeros_like(nu)-1.
     Mmax = np.zeros_like(nu)-1.
-    time_start = time.clock()
+    time_start = time.time()
     for i in range(len(nu)):
       if d[i] >= self.dcoll:
         delta,Delta,eps = self._sample_delta(nu[i],x[i],True,True)
@@ -442,7 +442,7 @@ class Cosmology(object):
         if np.size(rf) > 1:
           rmax[i],Mmax[i] = self._rM(eps[:len(rf)],rf,M,dlnXdlnq)
       if i%1000==999:
-        print('  sampled %d r_max, M_max pairs in %.2fs'%(i+1,time.clock() - time_start))
+        print('  sampled %d r_max, M_max pairs in %.2fs'%(i+1,time.time() - time_start))
     return rmax, Mmax
   
   def sample_A(self,N,return_ac=False,return_ace=False):
