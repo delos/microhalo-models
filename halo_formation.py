@@ -247,8 +247,7 @@ class Cosmology(object):
   def sample_ep(self,nu,x):
     
     '''
-    Sample peak properties e and p (ellipticity and prolateness) as defined in
-    BBKS 1986.
+    Sample e and p (ellipticity and prolateness) of the potential.
     '''
     
     # use inverse transform method
